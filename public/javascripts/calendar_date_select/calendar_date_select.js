@@ -179,7 +179,16 @@ CalendarDateSelect.prototype = {
           calendar_date_select: this,
           onmouseover: function () { this.calendar_date_select.dayHover(this); },
           onmouseout: function () { this.calendar_date_select.dayHoverOut(this) },
-          onclick: function() { this.calendar_date_select.updateSelectedDate(this, true); },
+          onclick: function() {
+            var previousDate = this.calendar_date_select.selected_date.toDateString();
+            var selectionWasMade = this.calendar_date_select.selection_made;
+
+            this.calendar_date_select.updateSelectedDate(this, true);
+            if (selectionWasMade &&
+                previousDate == this.calendar_date_select.selected_date.toDateString()) {
+              this.calendar_date_select.clearDate();
+            }
+          },
           className: (weekday==0) || (weekday==6) ? " weekend" : "" //clear the class
         },
         { cursor: "pointer" }
