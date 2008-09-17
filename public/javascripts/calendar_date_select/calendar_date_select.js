@@ -347,6 +347,7 @@ CalendarDateSelect.prototype = {
     if ((this.target_element.disabled || this.target_element.readOnly) && this.options.get("popup") != "force") return false;
     this.target_element.value = "";
     this.clearSelectedClass();
+    this.selection_made = false;
     this.updateFooter('&#160;');
   },
   updateSelectedDate:function(partsOrElement, via_click) {
